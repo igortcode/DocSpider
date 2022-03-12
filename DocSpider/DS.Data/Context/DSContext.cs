@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DS.Data.Mappings;
+using Microsoft.EntityFrameworkCore;
 
 namespace DS.Data.Context
 {
@@ -7,7 +8,8 @@ namespace DS.Data.Context
         public DSContext(DbContextOptions<DSContext> options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new ArquivoMapping());
+            modelBuilder.ApplyConfiguration(new LogMapping());
         }
     }
 }
