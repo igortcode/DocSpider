@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DS.Data.Repository
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : Entity, new()
+    public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : Entity, new()
     {
         protected readonly DSContext Context;
         protected readonly DbSet<TEntity> dbSet;
