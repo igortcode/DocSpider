@@ -11,6 +11,7 @@ namespace DS.Data.Context
         public DbSet<Log> Logs { get; set;}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Arquivo>().HasIndex(a => a.Nome).IsUnique();
             modelBuilder.ApplyConfiguration(new ArquivoMapping());
             modelBuilder.ApplyConfiguration(new LogMapping());
         }

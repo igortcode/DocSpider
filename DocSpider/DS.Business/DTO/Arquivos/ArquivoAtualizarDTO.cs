@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 
 namespace DS.Business.DTO.Arquivos
 {
@@ -9,6 +10,6 @@ namespace DS.Business.DTO.Arquivos
         public string Titulo { get; set; }
         public string Descricao { get; set; }
         public string ContentType { get; set; }
-        public byte[] Dados { get; set; }
+        public IFormFile Dados { get; set; }
     }
 }
