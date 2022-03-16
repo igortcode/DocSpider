@@ -1,4 +1,6 @@
-﻿namespace DS.Business.DTO.Arquivos
+﻿using Microsoft.AspNetCore.Http;
+
+namespace DS.Business.DTO.Arquivos
 {
     public class ArquivoCadastroDTO
     {
@@ -6,6 +8,6 @@
         public string Titulo { get; set; }
         public string Descricao { get; set; }
         public string ContentType { get; set; }
-        public byte[] Dados { get; set; }
+        public IFormFile Dados { get; set; }
     }
 }
