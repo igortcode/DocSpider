@@ -53,7 +53,7 @@ namespace DS.Data.Repository
             return await dbSet.AnyAsync(a => a.Nome.Equals(nome));
         }
 
-        public async Task<bool> ExisteCadastro(Guid id)
+        public async Task<bool> ExisteCadastro(Guid Id)
         {
             return await dbSet.AnyAsync(a => a.Id.Equals(Id));
         }
@@ -62,7 +62,7 @@ namespace DS.Data.Repository
         {
             string sql = @"SELECT 
                             COUNT(1) 
-                            FROM Arquivo;";
+                            FROM Arquivos;";
             
             var count = await _dapperRepository.DPExecuteScalarAsync<long>(sql);
             count = (int)Math.Ceiling((double)count / 10);
@@ -74,8 +74,8 @@ namespace DS.Data.Repository
                             Descricao, 
                             ContentType, 
                             DataCadastro 
-                            FROM Arquivo "
-                           +$"ORDER BY Arquivo.Nome OFFSET({pagina} - 1) * 10 ROWS FETCH FIRST 10 ROWS ONLY;";
+                            FROM Arquivos as A "
+                           +$"ORDER BY A.Nome OFFSET({pagina} - 1) * 10 ROWS FETCH FIRST 10 ROWS ONLY;";
 
             var list = await _dapperRepository.DbQueryAsync<ArquivoBuscaSemBlobDTO>(sql);
 

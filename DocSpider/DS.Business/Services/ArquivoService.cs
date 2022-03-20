@@ -24,15 +24,15 @@ namespace DS.Business.Services
         public async Task<ArquivoBuscaComBlobDTO> Novo(ArquivoCadastroDTO novoArquivo)
         {
             
-            if (await _arquivoRepository.ExisteCadastro(novoArquivo.Nome))
+            if (await _arquivoRepository.ExisteCadastro(novoArquivo.Dados.FileName))
                 throw new Exception("Já existe um cadastro com esse nome!");
 
             Arquivo result = new Entities.Arquivo
             {
-                Nome = novoArquivo.Nome,
+                Nome = novoArquivo.Dados.FileName,
                 Titulo = novoArquivo.Titulo,
                 Descricao = novoArquivo.Descricao,
-                ContentType = novoArquivo.ContentType,
+                ContentType = novoArquivo.Dados.ContentType,
                 Dados = ToBiteArray(novoArquivo.Dados),
                 DataCadastro = DateTime.Now,
             };
@@ -86,6 +86,12 @@ namespace DS.Business.Services
             return result;
         }
 
+        public async Task Excluir(Guid Id)
+        {
+            await _arquivoRepository.Remover(Id);
+            await _logRepository.Adicionar(new Log { Mensagem = $"Fulano excluiu o arquivo com Id = {Id}.", DataModificacao = DateTime.Now });
+        }
+
 
         public async Task<ArquivoListagemDTO> Pesquisa(int pagina, string pesquisa)
         {
@@ -105,7 +111,7 @@ namespace DS.Business.Services
 
         private void mapToAquivo(ArquivoAtualizarDTO atualizaArquivo, ref Arquivo arquivo)
         {
-            arquivo.Nome = atualizaArquivo.Nome;
+            arquivo.Nome = atualizaArquivo.Dados.FileName;
             arquivo.Titulo = atualizaArquivo.Titulo;
             arquivo.Descricao = atualizaArquivo.Descricao;
             arquivo.ContentType = atualizaArquivo.ContentType;

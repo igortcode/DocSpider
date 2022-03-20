@@ -7,7 +7,6 @@ namespace DS.Business.DTO.Arquivos
         public string Nome { get; set; }
         public string Titulo { get; set; }
         public string Descricao { get; set; }
-        public string ContentType { get; set; }
         public IFormFile Dados { get; set; }
     }
 }

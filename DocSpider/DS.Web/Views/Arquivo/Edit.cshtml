@@ -1,0 +1,40 @@
+﻿@model DS.Web.Models.ArquivoCadastroViewModel
+
+<h3>Editar Arquivo</h3>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Titulo" class="control-label"></label>
+                <input asp-for="Titulo" class="form-control" />
+                <span asp-validation-for="Titulo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label"></label>
+                <input asp-for="Descricao" type="text" class="form-control" />
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input class="btn" asp-for="Arquivo" type="file">
+                <span asp-validation-for="Arquivo"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Editar" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-dark">Voltar</a>
+            </div>
+        </form>
+        <div class="form-group">
+            <p> Download arquivo</p>
+            <input class="btn btn-info" value="Download" onclick="Javascript: DownloadFile('@Model.Id');" type="button">
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -10,7 +10,7 @@ namespace DS.Web.Configuration
     {
         public static IServiceCollection ResolveDependencies(this IServiceCollection services)
         {
-            services.AddScoped(typeof(Business.Interface.Repository.IGenericRepository<>), typeof(Data.Repository.GenericRepository<>));
+            //services.AddScoped(typeof(Business.Interface.Repository.IGenericRepository<>), typeof(Data.Repository.GenericRepository<>));
             services.AddScoped<IArquivoRepository, ArquivoRepository>();
             services.AddScoped<ILogRepository, LogRepository>();
             services.AddScoped<IDapperRepository, DapperRepository>();
