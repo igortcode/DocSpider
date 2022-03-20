@@ -12,5 +12,6 @@ namespace DS.Business.Interface.Service
         Task<ArquivoBuscaSemBlobDTO> BuscaSimplesPorId(Guid Id);
         Task<ArquivoBuscaComBlobDTO> BuscaCompletaPorId(Guid Id);
         Task<ArquivoListagemDTO> Pesquisa(int pagina, string pesquisa);
+        Task Excluir(Guid Id);
     }
 }

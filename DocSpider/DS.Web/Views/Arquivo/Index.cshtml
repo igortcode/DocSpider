@@ -1,0 +1,64 @@
+﻿@model IEnumerable<ArquivoDetalheSemBlobViewModel>
+
+@if (TempData["mensagem"] != null)
+{
+    <div class="alert alert-success">
+        <p>@TempData["mensagem"].ToString()</p>
+    </div>
+}
+else if (TempData["erro"] != null)
+{
+    <div class="alert alert-danger">
+        <p>@TempData["erro"].ToString()</p>
+    </div>
+}
+
+<a class="btn btn-success btn-sm" asp-action="Create">Novo cadastro</a>
+<br />
+
+<table class="table" style="margin-top: 20px">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Titulo)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.DataCadastro)
+            </th>
+            <th scope="col">
+                Ações
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @item.DataCadastro.ToString("dd/MM/yyyy/HH:mm:ss")
+                </td>
+                <td>
+                    <a class="fa fa-pencil-square-o alert-success" aria-hidden="true" asp-action="Edit" asp-route-id="@item.Id"></a>
+                    <a class="fa fa-file alert-info" asp-action="Details" asp-route-id="@item.Id"></a>
+                    <a class="fa fa-trash alert-danger" onclick="DeleteArquivo('@item.Id')"></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
